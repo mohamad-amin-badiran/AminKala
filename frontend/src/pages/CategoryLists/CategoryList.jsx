@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { HiShoppingCart } from "react-icons/hi";
+import { HiOutlineFolderOpen, HiShoppingCart } from "react-icons/hi";
 import { useParams, useLocation } from "react-router-dom";
 
 const CategoryList = () => {
@@ -32,7 +32,11 @@ const CategoryList = () => {
   return (
     <>
       <div className="flex flex-wrap bg-slate-200">
-        {filterList &&
+        {filterList.length === 0 ? 
+        <div className="flex my-10 mx-auto items-center">
+          <HiOutlineFolderOpen size={50}/>
+          ohhh no not eny data
+        </div> :
           filterList.map((card) => (
             <div
               key={card.id}
@@ -62,7 +66,7 @@ const CategoryList = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> 
           ))}
       </div>
     </>

@@ -56,18 +56,20 @@ app.post("/products", (req, res) => {
   });
 });
 
+app.get("/cart", (req, res) => {
+  const q = "SELECT * FROM cart";
+  db.query(q, (err, data) => {
+    if (err) {
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+});
+
 app.post("/cart", (req, res) => {
   const q =
-    "INSERT INTO `cart` (`name`,`category`, `cover`, `descreption`, `discount`, `price`) VALUES (?)";
-  let value = [
-    req.name,
-    req.category,
-    req.cover,
-    req.descreption,
-    req.discount,
-    req.price,
-  ];
-  db.query(q, [value], (err, res) => {
+    "INSERT INTO `cart` (`name`,`category`,`price`) VALUES ( name, category, price)";
+  db.query(q, (err, res) => {
     if (err) {
       return res.json(err);
     }
@@ -75,6 +77,6 @@ app.post("/cart", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(1111, () => {
   console.log("this connected is successfuly");
 });

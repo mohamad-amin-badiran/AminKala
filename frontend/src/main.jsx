@@ -5,6 +5,7 @@ import MainLayout from "./layouts/Layout";
 import "../public/style.css";
 import App from "./App";
 import CategoryList from "./pages/CategoryLists/CategoryList";
+import CartLists from "./pages/cart/cartLists";
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
       {
         path: "/category/:id",
         element: <CategoryList />,
+      },
+      {
+        path: "/cart",
+        element: <CartLists />,
       },
     ],
   },
