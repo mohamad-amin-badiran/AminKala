@@ -2,10 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { HiOutlineFolderOpen, HiShoppingCart } from "react-icons/hi";
 import { useParams, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../reducers/cartSlice";
+import { toast } from "react-hot-toast";
 
 const CategoryList = () => {
   let category = useParams();
+  let dispatch = useDispatch();
   const [CardList, setCardList] = useState([]);
+
   useEffect(() => {
     let fetchData = async () => {
       let response = axios.get("http://localhost:1111/products");
@@ -13,30 +18,34 @@ const CategoryList = () => {
     };
     fetchData();
   }, []);
+
   let AddToCart = async (id) => {
-    let addProduct = CardList.filter((card) => card.id === id);
-    let obj = {
-      name: addProduct[0].name,
-      category: addProduct[0].category,
-      cover: addProduct[0].cover,
-      descreption: addProduct[0].descreption,
-      discount: addProduct[0].discount,
-      price: addProduct[0].price,
-    };
-    console.log(obj);
-    let response = axios.post("http://localhost:1111/cart", {obj});
-    console.log(response);
-    console.log(addProduct[0]);
+    toast.success("Add To Cart ✔✨!");
+    let AddCart = CardList.filter((card) => card.id === id);
+    dispatch(
+      addToCart({
+        id: AddCart[0].id,
+        name: AddCart[0].name,
+        cover: AddCart[0].cover,
+        category: AddCart[0].category,
+        descreption: AddCart[0].descreption,
+        discount: AddCart[0].discount,
+        price: AddCart[0].price,
+      })
+    );
+    // let response = axios.post("http://localhost:1111/cart", {obj});
   };
+
   let filterList = CardList.filter((card) => card.category === category.id);
   return (
     <>
-      <div className="flex flex-wrap bg-slate-200">
-        {filterList.length === 0 ? 
-        <div className="flex my-10 mx-auto items-center">
-          <HiOutlineFolderOpen size={50}/>
-          ohhh no not eny data
-        </div> :
+      <div className="grid xl:grid-cols-6 md:grid-cols-4 grid-cols-2 bg-slate-200">
+        {filterList.length === 0 ? (
+          <div className="flex my-10 mx-auto items-center">
+            <HiOutlineFolderOpen size={50} />
+            ohhh no not eny data
+          </div>
+        ) : (
           filterList.map((card) => (
             <div
               key={card.id}
@@ -66,8 +75,9 @@ const CategoryList = () => {
                   </button>
                 </div>
               </div>
-            </div> 
-          ))}
+            </div>
+          ))
+        )}
       </div>
     </>
   );

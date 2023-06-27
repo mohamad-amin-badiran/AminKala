@@ -4,9 +4,18 @@ import {
   HiOutlineChevronUp,
   HiOutlineTrash,
 } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import { deleteFromCart } from "../../reducers/cartSlice";
+import { toast } from "react-hot-toast";
 
 const CartList = ({ data }) => {
   const [qty, setQty] = useState(1);
+  let dispatch = useDispatch();
+  let deleteCart = (dataId) => {
+    toast.success("Remove form Cart success 👍!");
+    dispatch(deleteFromCart(dataId.toString()));
+    console.log(dataId);
+  };
   return (
     <>
       <div className="md:flex px-10 pt-10 items-center justify-between">
@@ -34,7 +43,10 @@ const CartList = ({ data }) => {
             <h5 className="text-lg font-medium bg-slate-200 pointer rounded-xl p-2 text-center w-auto mx-3">
               ${data.price}
             </h5>
-            <button className="text-lg font-medium hover:text-white hover:bg-rose-700  pointer hover:rounded-xl p-3 flex justify-center w-auto">
+            <button
+              className="text-lg font-medium hover:text-white hover:bg-rose-700  pointer hover:rounded-xl p-3 flex justify-center w-auto"
+              onClick={() => deleteCart(data.id)}
+            >
               <HiOutlineTrash />
             </button>
           </div>

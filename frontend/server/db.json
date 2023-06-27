@@ -1,0 +1,22 @@
+{
+  "cart": [
+    {
+      "id": 6,
+      "name": "sumsung Galexy S22",
+      "cover": "https://dkstatics-public.digikala.com/digikala-products/ebe1b2041a76fda30ce7b8870ddfd627f5affa2a_1675770743.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/format,webp/quality,q_80",
+      "category": "phone",
+      "descreption": "this phone is cool",
+      "discount": 10,
+      "price": 28000000
+    },
+    {
+      "id": 3,
+      "name": "iphone x",
+      "cover": "https://dkstatics-public.digikala.com/digikala-products/bf17e958157d0ffb24713b457935c10d54c0fec9_1657356580.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/format,webp/quality,q_80",
+      "category": "phone",
+      "descreption": "this phone is cool",
+      "discount": 50,
+      "price": 10000000
+    }
+  ]
+}
